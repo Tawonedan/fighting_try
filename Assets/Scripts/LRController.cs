@@ -1,34 +1,30 @@
-// Import modul yang diperlukan
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// Buat kelas pemain
 public class Pemain : MonoBehaviour
 {
-    // Variabel untuk menyimpan posisi pemain
-    public Vector3 posisi;
+    // Kecepatan pergerakan karakter
+    public float kecepatanPergerakan = 5f;
 
-    // Inisialisasi pemain
-    void Start()
-    {
-        // Atur posisi pemain ke pusat layar
-        posisi = new Vector3(Screen.width / 2, Screen.height / 2, 0);
-    }
-
-    // Update pemain setiap frame
     void Update()
     {
-        // Periksa apakah tombol panah kiri atau kanan ditekan
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        float gerakanHorizontal = 0f;
+
+        // Periksa hanya input dari keyboard
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            // Gerakkan pemain ke kiri
-            posisi.x -= 10;
+            gerakanHorizontal = -1f;
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
-            // Gerakkan pemain ke kanan
-            posisi.x += 10;
+            gerakanHorizontal = 1f;
         }
+
+        // Hitung pergerakan berdasarkan input horizontal
+        Vector3 gerakan = new Vector3(gerakanHorizontal, 0f, 0f) * kecepatanPergerakan * Time.deltaTime;
+
+        // Terapkan pergerakan pada posisi karakter
+        transform.position += gerakan;
     }
 }
