@@ -1053,9 +1053,9 @@ GameObject:
   - component: {fileID: 1195976634}
   - component: {fileID: 1195976633}
   - component: {fileID: 1195976638}
-  - component: {fileID: 1195976637}
   - component: {fileID: 1195976640}
   - component: {fileID: 1195976639}
+  - component: {fileID: 1195976641}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -1151,25 +1151,6 @@ Transform:
   - {fileID: 733021127}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1195976637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195976632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63730953af8bbcf48a9a0ab18bba6809, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 16
-  runSpeed: 12
-  jumpPower: 15
-  gravity: 25
-  lookSpeed: 2
-  lookXLimit: 45
-  canMove: 1
 --- !u!143 &1195976638
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1217,7 +1198,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195976632}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 75137a2921aaebb40b93c664effbcb27, type: 3}
   m_Name: 
@@ -1225,6 +1206,30 @@ MonoBehaviour:
   attackHitboxes:
   - {fileID: 457293159}
   - {fileID: 2137269409}
+  audioPlayer: {fileID: 2020405211}
+--- !u!114 &1195976641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195976632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63730953af8bbcf48a9a0ab18bba6809, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 16
+  runSpeed: 12
+  jumpPower: 15
+  gravity: 25
+  lookSpeed: 2
+  lookXLimit: 45
+  canMove: 1
+  attackHitboxes:
+  - {fileID: 457293159}
+  - {fileID: 2137269409}
+  knockbackForce: 10
   audioPlayer: {fileID: 2020405211}
 --- !u!1 &1323674823
 GameObject:
@@ -1238,6 +1243,7 @@ GameObject:
   - component: {fileID: 1323674826}
   - component: {fileID: 1323674825}
   - component: {fileID: 1323674824}
+  - component: {fileID: 1323674829}
   m_Layer: 0
   m_Name: pillar (2)
   m_TagString: Untagged
@@ -1331,6 +1337,32 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &1323674829
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323674823}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 1
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1416430086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,6 +1835,7 @@ GameObject:
   - component: {fileID: 1540488412}
   - component: {fileID: 1540488417}
   - component: {fileID: 1540488416}
+  - component: {fileID: 1540488418}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Player
@@ -1926,6 +1959,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackHitboxes: []
   audioPlayer: {fileID: 0}
+--- !u!54 &1540488418
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1540488411}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
 --- !u!1 &1687597766
 GameObject:
   m_ObjectHideFlags: 0
