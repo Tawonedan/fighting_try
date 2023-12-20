@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63730953af8bbcf48a9a0ab18bba6809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 16
+  walkSpeed: 4
   runSpeed: 12
   jumpPower: 15
   gravity: 25
