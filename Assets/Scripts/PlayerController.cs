@@ -6,28 +6,31 @@ using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
+    //Movement declaration
 
+    //Movement
     public float walkSpeed = 16f;
     public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 1f;
 
-
-    public float lookSpeed = 2f;
-    public float lookXLimit = 45f;
-
-
+    //Rotate
     Vector3 moveDirection = Vector3.zero;
-    private bool facingRight = true; // Assuming this variable is used for flipping
+    private bool facingRight = true;
 
     public bool canMove = true;
 
+    //Crouch
+    private Vector3 crouchScale = new Vector3(1, 1f, 1);
+    private Vector3 playerScale = new Vector3(1, 1.9f, 1);
+    //end declaration
+
+    //Action declaration
     public Collider[] attackHitboxes;
-    // Update is called once per frame
-
     public float knockbackForce = 500f;
-
     public AudioSource audioPlayer;
+    //End declaration
+
     CharacterController characterController;
     void Start()
     {
@@ -47,7 +50,7 @@ public class FPSController : MonoBehaviour
            LaunchAttack(attackHitboxes[1]);
         #endregion
 
-        #region Handles Movment
+        #region Handles Movement
         Vector3 right = transform.TransformDirection(Vector3.right);
 
         // Press Left Shift to run
@@ -92,6 +95,21 @@ public class FPSController : MonoBehaviour
         }
         #endregion
 
+        #region Handles Crouch
+        if(Input.GetKeyDown(KeyCode.S))
+        {
+            Debug.Log("Kepencet");
+            transform.localScale = crouchScale;
+            transform.position = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
+        } 
+        if(Input.GetKeyUp(KeyCode.S))
+        {
+            Debug.Log("ga Kepencet wleeeeeee");
+            transform.localScale = playerScale;
+            transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+        }
+        #endregion
+
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
         }
@@ -105,36 +123,44 @@ public class FPSController : MonoBehaviour
         }
 
         private void LaunchAttack (Collider col)
-         {
-             Collider[] cols = Physics.OverlapBox(col.bounds.center,col.bounds.extents,col.transform.rotation,LayerMask.GetMask("Hitbox"));
-             foreach(Collider c in cols)
-             {
-                 if(c.transform.parent.parent == transform)
-                 continue;
- 
-                 float damage = 0;
-                 switch(c.name)
-                 {
-                     case "Head":
-                     damage = 30;
-                     break;
-                     case "Torso":
-                     damage = 10;
-                     break;
-                     default:
-                     Debug.Log("Unable to identify body part");
-                     break;
-                 }
+        {
+            Collider[] cols = Physics.OverlapBox(col.bounds.center,col.bounds.extents,col.transform.rotation,LayerMask.GetMask("Hitbox"));
+            foreach(Collider c in cols)
+            {
+                if(c.transform.parent.parent == transform)
+                continue;
+
+                float damage = 0;
+                switch(c.name)
+                {
+                    case "Head":
+                    damage = 30;
+                    break;
+                    case "Torso":
+                    damage = 10;
+                    break;
+                    default:
+                    Debug.Log("Unable to identify body part");
+                    break;
+                }
      
  
-             c.SendMessageUpwards("TakeDamage",damage);
-             audioPlayer.Play(); 
+            c.SendMessageUpwards("TakeDamage",damage);
+            audioPlayer.Play(); 
 
             Vector3 knockbackDirection = c.transform.position - col.transform.position;
             knockbackDirection.Normalize();
-            c.transform.parent.parent.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+            // c.transform.parent.parent.GetComponent<Rigidbody>().AddForce(knockbackDirection * knockbackForce, ForceMode.Impulse);
+            if (facingRight)
+            {
+
+            c.transform.parent.parent.GetComponent<Rigidbody>().AddForce(transform.right * 5, ForceMode.Impulse);
  
-         }
-    }
+            } else {
+            c.transform.parent.parent.GetComponent<Rigidbody>().AddForce(transform.right * -5, ForceMode.Impulse);
+            }
+            }
+        }
+
         
 }
