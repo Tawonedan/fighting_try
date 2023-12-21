@@ -41,8 +41,8 @@ public class FPSController : MonoBehaviour
 
     void Update()
     {
-
-
+        if(!PauseMenu.isPaused)
+        {
         #region Handles hit
         if(Input.GetKeyDown(KeyCode.G))
            LaunchAttack(attackHitboxes[0]);
@@ -112,6 +112,7 @@ public class FPSController : MonoBehaviour
 
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
+        }
         }
         
         void Flip()
