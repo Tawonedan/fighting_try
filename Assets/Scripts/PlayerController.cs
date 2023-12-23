@@ -21,6 +21,7 @@ public class FPSController : MonoBehaviour
     public bool canMove = true;
 
     //Crouch
+    bool isCrouching = false;
     private Vector3 crouchScale = new Vector3(1, 1f, 1);
     private Vector3 playerScale = new Vector3(1, 1.9f, 1);
     //end declaration
@@ -106,7 +107,7 @@ public class FPSController : MonoBehaviour
         {
             Debug.Log("ga Kepencet wleeeeeee");
             transform.localScale = playerScale;
-            transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+            // transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
         }
         #endregion
 
