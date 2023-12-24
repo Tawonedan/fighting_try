@@ -24,6 +24,15 @@ public class FPSController : MonoBehaviour
     bool isCrouching = false;
     private Vector3 crouchScale = new Vector3(1, 1f, 1);
     private Vector3 playerScale = new Vector3(1, 1.9f, 1);
+
+    //Dash
+    public float dashDistance = 5f;
+    public float dashDuration = 0.2f;
+    private bool isDashing = false;
+
+
+    [SerializeField] private Rigidbody rb;
+
     //end declaration
 
     //Action declaration
@@ -50,6 +59,19 @@ public class FPSController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.H))
            LaunchAttack(attackHitboxes[1]);
         #endregion
+
+        #region Handles Dash
+            if (Input.GetKeyDown(KeyCode.F) && canMove && !isDashing)
+            {
+                float dashDirection = Input.GetAxisRaw("Horizontal"); // Get horizontal input
+
+                if (dashDirection != 0)
+                {
+                    StartCoroutine(Dash(dashDirection));
+                }
+            }
+            #endregion
+
 
         #region Handles Movement
         Vector3 right = transform.TransformDirection(Vector3.right);
@@ -123,6 +145,24 @@ public class FPSController : MonoBehaviour
         localScale.x *= -1;
         transform.localScale = localScale;
         }
+
+      IEnumerator Dash(float direction)
+      {
+        isDashing = true;
+        float startTime = Time.time;
+        Vector3 originalPosition = transform.position;
+        Vector3 dashEndPosition = originalPosition + Vector3.right * direction * dashDistance; // Change the direction of the dash
+
+        while (Time.time < startTime + dashDuration)
+        {
+            float percentage = (Time.time - startTime) / dashDuration;
+            characterController.Move(Vector3.right * direction * dashDistance * Time.deltaTime / dashDuration);
+            yield return null;
+        }
+
+        isDashing = false;
+       }
+
 
         private void LaunchAttack (Collider col)
         {

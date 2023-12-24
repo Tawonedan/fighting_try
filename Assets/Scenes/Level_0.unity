@@ -1992,6 +1992,7 @@ GameObject:
   - component: {fileID: 1195976639}
   - component: {fileID: 1195976641}
   - component: {fileID: 1195976642}
+  - component: {fileID: 1195976643}
   m_Layer: 0
   m_Name: Player1
   m_TagString: Player
@@ -2078,9 +2079,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195976632}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.49, y: 1.37, z: -2.93}
-  m_LocalScale: {x: 1.0779, y: 1.9741, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.4899993, y: 1.3700001, z: -2.93}
+  m_LocalScale: {x: 1.0779, y: 1.9741001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1835609504}
@@ -2144,6 +2145,10 @@ MonoBehaviour:
   jumpPower: 15
   gravity: 25
   canMove: 1
+  dashingPower: 10
+  dashingTime: 0.2
+  dashingCooldown: 1
+  rb: {fileID: 1195976643}
   attackHitboxes:
   - {fileID: 457293159}
   - {fileID: 2137269409}
@@ -2163,6 +2168,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentMana: {fileID: 1377167231}
   ratioText: {fileID: 336191594}
+--- !u!54 &1195976643
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1195976632}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
 --- !u!1 &1323674823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2880,7 +2912,6 @@ GameObject:
   - component: {fileID: 1540488414}
   - component: {fileID: 1540488413}
   - component: {fileID: 1540488412}
-  - component: {fileID: 1540488417}
   - component: {fileID: 1540488416}
   - component: {fileID: 1540488418}
   m_Layer: 0
@@ -2992,18 +3023,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealthbar: {fileID: 576280261}
   ratioText: {fileID: 1768640801}
---- !u!114 &1540488417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1540488411}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75137a2921aaebb40b93c664effbcb27, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &1540488418
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3024,13 +3043,13 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
+  m_ImplicitCom: 0
+  m_ImplicitTensor: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 120
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &1655165319
 GameObject:
   m_ObjectHideFlags: 0
