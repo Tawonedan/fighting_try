@@ -22,8 +22,8 @@ public class FPSController : MonoBehaviour
 
     //Crouch
     bool isCrouching = false;
-    private Vector3 crouchScale = new Vector3(1, 1f, 1);
-    private Vector3 playerScale = new Vector3(1, 1.9f, 1);
+    float originalHeight;
+    private float crouchHeight = 0.5f;
 
     //Dash
     public float dashDistance = 5f;
@@ -45,6 +45,7 @@ public class FPSController : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        originalHeight = characterController.height; // Simpan tinggi karakter awal
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -119,19 +120,23 @@ public class FPSController : MonoBehaviour
         #endregion
 
         #region Handles Crouch
-        if(Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.S))
         {
-            Debug.Log("Kepencet");
-            transform.localScale = crouchScale;
-            transform.position = new Vector3(transform.position.x, transform.position.y - 1f, transform.position.z);
-        } 
-        if(Input.GetKeyUp(KeyCode.S))
-        {
-            Debug.Log("ga Kepencet wleeeeeee");
-            transform.localScale = playerScale;
-            // transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
+            if (!isCrouching)
+            {
+                isCrouching = true;
+                characterController.height = crouchHeight; // Kurangi tinggi karakter saat crouch
+            }
         }
-        #endregion
+        else if (Input.GetKeyUp(KeyCode.S))
+        {
+            if (isCrouching)
+            {
+                isCrouching = false;
+                characterController.height = originalHeight; // Kembalikan tinggi karakter ke nilai semula
+            }
+        }
+    #endregion
 
         moveDirection.y -= gravity * Time.deltaTime;
         characterController.Move(moveDirection * Time.deltaTime);
